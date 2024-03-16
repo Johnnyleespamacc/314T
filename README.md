@@ -3,7 +3,8 @@
 
 ===================================================================================================
                                                 Intro
-I had done positive testing for Project 7 using Javascript programming inside of Visual Studios, using git commands, Postman, let, const, test, and catch commands.
+
+The purpose of project 7 is showing that I had done positive testing for Project 7 using Javascript programming inside of Visual Studios, using git commands, Postman, let, const, test, and catch commands. Providing descriptive details and steps on how to install npm, discrepencies, setting up testing URL, postman, copying files from github, and explanation of the tests.
 
 ===================================================================================================
                                                 Preparations   
