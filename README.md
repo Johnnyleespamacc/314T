@@ -20,6 +20,7 @@ I had done positive testing for Project 7 using Javascript programming inside of
 4. Open the hm07-qa-us and on the main bar in the middle. Double click and type down CMDand press enter
 5. A cmd will open up with the pathway where the hm07-qa-us is located
 6. Type down "npm install" 
+7. next is type down "npm install jest" for the dependencies
 ===================================================================================================
                                                  Setting up the Server to test
 1. Log into the trippleten homepage and navigate to sprint 7 project
@@ -32,6 +33,7 @@ I had done positive testing for Project 7 using Javascript programming inside of
 1. Log into postman and enter new environment
 2. On the upper right hand corner click the icon that looks like a papericon with an eye on it. If hovered it would say "Envrionmental Quick Look" and then click "add" on the envionmental section
 3. Add a name in the "variable" and in the "initial value" and "current value" insert the URL that was deployed by tripleten
+4. After that postman should be ready. The only thing that is needed is to change the methods.
 ===================================================================================================
                                               Creating ID for Delete Requests
 1. In postman start a DELETE requests. In the bar near the Delete request add the variable that was created in the new environment earlier and add in "api/v1/kits"
@@ -54,35 +56,6 @@ I had done positive testing for Project 7 using Javascript programming inside of
 2. Open the deleteHandlers.test.js with Visual Studio
 3. There are 2 test that will be tested. The first is to see if the status code returns "200 ok" and the 2nd test will be he body response returning as a boolean "true"
 4. Include this Code:
-const config = require('../config');
-
-test('Status code is 200 ok', async () => {
-	let actualStatusCode;
-    try {
-		const response = await fetch(`${config.API_URL}/api/v1/kits/7`, {
-			method: 'DELETE',
-		});
-		actualStatusCode = response.status;
-	} catch (error) {
-		console.error(error);
-	}
-	expect(actualStatusCode).toBe(200);
-});
-
-
-test('Response body should return "true"', async () => {
-	let actualResponseBody;
-    try {
-		const response = await fetch(`${config.API_URL}/api/v1/kits/7`, {
-			method: 'DELETE',
-		});
-		actualResponseBody = await response.json()
-	} catch (error) {
-		console.error(error);
-	}
-	expect(actualResponseBody["ok"]).toBe(Boolean("true"));
-});
-
 
 5. Before initializing the test make sure to add ththe endpoint "/api/v1/kits/7`" on the const. response line at the end for line "6" and "20"
 6. Save
@@ -96,30 +69,6 @@ test('Response body should return "true"', async () => {
 1. In the same "tests" folder do the same thing but for the getHandlers.test.js
 2. 2 Tests will also be tested. First one is to see if the Status Code comes out "200" and the 2nd is the Body Response will come out  as "For Picnic".
 3. Include this code:
-const config = require('../config');
-
-test('Return 200 Status Code', async () => {
-	let actualStatusCode;
-	try {
-		const response = await fetch(`${config.API_URL}/api/v1/kits/1`);
-		actualStatusCode = response.status;
-	} catch (error) {
-		console.error(error);
-	}
-	expect(actualStatusCode).toBe(200);
-});
-
-
-test('Body should contain.....', async () => {
-	let actualResponseBody;
-	try {
-		const response = await fetch(`${config.API_URL}/api/v1/kits/1`);
-		actualResponseBody = await response.json()
-	} catch (error) {
-		console.error(error);
-	}
-	expect(actualResponseBody.name).toBe("For picnic");
-});
 4. Be sure to add the endpoint is included "/api/v1/kits/1"
 5. Save
 6. Go back to the cmd line and start the tests with "npx jest getHandlers.test.js"
@@ -133,52 +82,6 @@ test('Body should contain.....', async () => {
 2. Open the postHandlers.test.js with Visual Studio
 3. There are 2 test that will be tested. The first is to see if the status code returns "200 ok" and the 2nd test will be he body response to check the warehouse of the store.
 4. Include this Code:
-const config = require('../config');
-
-const requestBody = {
-	"productsList": [
-		{
-		  "id": 5,
-		  "quantity": 1
-		}
-	  ]
-}
-
-test('Status code 201', async () => {
-	let actualStatusCode;
-    try {
-		const response = await fetch(`${config.API_URL}/api/v1/orders`, {
-			method: 'POST',
-			headers: {
-			'Content-Type': 'application/json'
-			},
-			body: JSON.stringify(requestBody)
-		});
-		actualStatusCode = response.status;
-	} catch (error) {
-		console.error(error);
-	}
-	expect(actualStatusCode).toBe(201);
-});
-
-
-
-test('Response body should contain', async () => {
-	let actualResponseBody;
-    try {
-		const response = await fetch(`${config.API_URL}/api/v1/orders`, {
-			method: 'POST',
-			headers: {
-			'Content-Type': 'application/json'
-			},
-			body: JSON.stringify(requestBody)
-		});
-		actualResponseBody = await response.json()
-	} catch (error) {
-		console.error(error);
-	}
-	expect(actualResponseBody["wareHouse"]).toBe("Fresh Food");
-});
 5. Be sure to add "/api/v1/orders`" at the end point 
 6. Save 
 7. On the cmd line start the tests with "npx jest postHandlers.test.js"
@@ -193,45 +96,6 @@ test('Response body should contain', async () => {
 1. Do the same thing as a previous but select "putHandlers.test.js" with Visual Studio
 2. The test will be checking the Statuscode is "200" and the Bodyresponse for a "deliveryprice" and the outcome is "0"
 3. Include this code:
-const config = require('../config');
-
-const requestBody = {}
-
-test('Return 200 Status Code', async () => {
-	let actualStatusCode;
-    try {
-		const response = await fetch(`${config.API_URL}/api/v1/orders/1`, {
-			method: 'PUT',
-			headers: {
-			'Content-Type': 'application/json'
-			},
-			body: JSON.stringify(requestBody)
-		});
-		actualStatusCode = response.status;
-	} catch (error) {
-		console.error(error);
-	}
-	expect(actualStatusCode).toBe(200);
-});
-
-
-
-test('Return body should caontain..', async () => {
-	let actualResponseBody;
-    try {
-		const response = await fetch(`${config.API_URL}/api/v1/orders/1`, {
-			method: 'PUT',
-			headers: {
-			'Content-Type': 'application/json'
-			},
-			body: JSON.stringify(requestBody)
-		});
-		actualResponseBody = await response.json()
-	} catch (error) {
-		console.error(error);
-	}
-	expect(actualResponseBody["deliveryPrice"]).toBe(0);
-});
 4. Be sure to change the endpoint to "/api/v1/orders/1"
 5. Save
 6. Start the tests with "npx jest putHandlers.test.js" with visual studio

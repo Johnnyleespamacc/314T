@@ -12,7 +12,7 @@ test('Return 200 Status Code', async () => {
 });
 
 
-test('Body should contain.....', async () => {
+test('Body should contain For picnic', async () => {
 	let actualResponseBody;
 	try {
 		const response = await fetch(`${config.API_URL}/api/v1/kits/1`);

@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-undef
 const config = require('../config');
 
 const requestBody = {
@@ -29,7 +28,7 @@ test('Status code 201', async () => {
 
 
 
-test('Response body should contain', async () => {
+test('Response body should contain warehouse as Fresh Food', async () => {
 	let actualResponseBody;
     try {
 		const response = await fetch(`${config.API_URL}/api/v1/orders`, {

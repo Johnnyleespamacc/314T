@@ -1,12 +1,19 @@
 // eslint-disable-next-line no-undef
 const config = require('../config');
 
-const requestBody = {}
+const requestBody = {   
+	 "productsList": [
+	{
+		"id": 3,
+		"quantity": 0
+	}
+]
+}
 
 test('Return 200 Status Code', async () => {
 	let actualStatusCode;
     try {
-		const response = await fetch(`${config.API_URL}/api/v1/orders/1`, {
+		const response = await fetch(`${config.API_URL}/api/v1/orders/2`, {
 			method: 'PUT',
 			headers: {
 			'Content-Type': 'application/json'
@@ -22,10 +29,10 @@ test('Return 200 Status Code', async () => {
 
 
 
-test('Return body should caontain..', async () => {
+test('Return body should contain courierService: Order and Go', async () => {
 	let actualResponseBody;
     try {
-		const response = await fetch(`${config.API_URL}/api/v1/orders/1`, {
+		const response = await fetch(`${config.API_URL}/api/v1/orders/2`, {
 			method: 'PUT',
 			headers: {
 			'Content-Type': 'application/json'
@@ -36,5 +43,5 @@ test('Return body should caontain..', async () => {
 	} catch (error) {
 		console.error(error);
 	}
-	expect(actualResponseBody["deliveryPrice"]).toBe(0);
+	expect(actualResponseBody["courierService"]).toBe("Order and Go");
 });
